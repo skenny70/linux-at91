@@ -137,8 +137,9 @@ config SOC_AT91SAM9N12
 	  Select this if you are using Atmel's AT91SAM9N12 SoC.
 
 # ----------------------------------------------------------
-
+if ATAGS
 source arch/arm/mach-at91/Kconfig.non_dt
+endif
 endif # SOC_SAM_V4_V5
 
 comment "Generic Board Type"
