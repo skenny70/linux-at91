@@ -13,6 +13,10 @@
 	model = "Bitlab SAMA5D31-BT";
 	compatible = "atmel,sama5d31ek", "atmel,sama5ek", "atmel,sama5d3", "atmel,sama5";
 
+        chosen {
+                bootargs = "console=ttyS0,115200 rw root=/dev/ram0";
+        };
+
 	ahb {
 		apb {
 			spi0: spi@f0004000 {
