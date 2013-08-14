@@ -20,6 +20,12 @@
 	ahb {
 		apb {
 			spi0: spi@f0004000 {
+				bus-num = <0>;
+				status = "okay";
+			};
+
+			spi1: spi@f8008000 {
+				bus-num = <1>;
 				status = "okay";
 			};
 

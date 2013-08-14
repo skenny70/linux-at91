@@ -1649,7 +1649,6 @@ static int __devinit atmel_spi_probe(struct platform_device *pdev)
 
 	/* the spi->mode bits understood by this driver: */
 	master->mode_bits = SPI_CPOL | SPI_CPHA | SPI_CS_HIGH;
-
 	master->bus_num = pdev->id;
 	master->dev.of_node = pdev->dev.of_node;
 	master->num_chipselect = master->dev.of_node ? 0 : 4;
@@ -1714,12 +1713,12 @@ static int __devinit atmel_spi_probe(struct platform_device *pdev)
 	spi_writel(as, CR, SPI_BIT(SPIEN));
 
 	/* go! */
-	dev_info(&pdev->dev, "Atmel SPI Controller at 0x%08lx (irq %d)\n",
-			(unsigned long)regs->start, irq);
-
 	ret = spi_register_master(master);
 	if (ret)
 		goto out_free_dma;
+
+	dev_info(&pdev->dev, "Atmel SPI%d Controller at 0x%08lx (irq %d)\n",
+			master->bus_num, (unsigned long)regs->start, irq);
 
 	return 0;
 

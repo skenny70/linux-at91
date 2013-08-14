@@ -955,12 +955,18 @@ EXPORT_SYMBOL_GPL(spi_alloc_master);
 #ifdef CONFIG_OF
 static int of_spi_register_master(struct spi_master *master)
 {
+	const __be32 *bn;
 	int nb, i;
 	int *cs;
+
 	struct device_node *np = master->dev.of_node;
 
 	if (!np)
 		return 0;
+
+	bn = of_get_property(np, "bus-num", NULL);
+	if (bn)
+		master->bus_num = be32_to_cpup(bn);
 
 	nb = of_gpio_named_count(np, "cs-gpios");
 
